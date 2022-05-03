@@ -6,7 +6,7 @@ const router = express.Router()
 router.get('/', (_req, res) => {
   const diagnoses = diagnosesService.getDiagnoses()
 
-  console.log('Fetching all diaries')
+  console.log('Fetching all diagnoses')
   res.send(diagnoses)
 })
 

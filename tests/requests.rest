@@ -5,3 +5,7 @@ GET http://localhost:3000/api/ping
 ### Exercise 9.10 - GET Request to diagnoses endpoint
 ## Expect a json with all diagnoses
 GET http://localhost:3000/api/diagnoses
+
+### Exercise 9.11 - GET Request to patients endpoint
+## Expect a json with all patients, excluding the ssn property
+GET http://localhost:3000/api/patients
