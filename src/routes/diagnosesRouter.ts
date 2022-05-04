@@ -7,7 +7,7 @@ router.get('/', (_req, res) => {
   const diagnoses = diagnosesService.getDiagnoses()
 
   console.log('Fetching all diagnoses')
-  res.send(diagnoses)
+  res.json(diagnoses)
 })
 
 export default router

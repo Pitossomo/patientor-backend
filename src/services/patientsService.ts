@@ -1,16 +1,36 @@
 import patientsData from '../data/patients.json'
-import { Patient } from '../types'
+import { newPatient, NonSensitiveDataPatient, Patient } from '../types'
+import { v1 as uuid } from 'uuid'
 
-const getPatients = (): Array<Omit<Patient, 'ssn'>> => {
-  return patientsData.map(({ id, name, dateOfBirth, gender, occupation }) => {
-    return {
-      id,
-      name,
-      dateOfBirth,
-      gender,
-      occupation
-    }
+const removeSensitiveData = ({ id, name, dateOfBirth, gender, occupation }: Patient): NonSensitiveDataPatient => {
+  return {
+    id,
+    name,
+    dateOfBirth,
+    gender,
+    occupation
+  }
+}
+
+const getPatients = (): Array<NonSensitiveDataPatient> => {
+  return patientsData.map((patient) => {
+    return removeSensitiveData(patient)
   })
 }
 
-export default { getPatients }
+const addPatient = (patient: newPatient): NonSensitiveDataPatient => {
+  const newPatient = {
+    id: uuid(),
+    name: patient.name,
+    dateOfBirth: patient.dateOfBirth,
+    ssn: patient.ssn,
+    gender: patient.gender,
+    occupation: patient.occupation
+  }
+
+  patientsData.push(newPatient)
+
+  return removeSensitiveData(newPatient)
+}
+
+export default { getPatients, addPatient }

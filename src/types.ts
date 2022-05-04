@@ -14,3 +14,7 @@ export interface Patient {
   ssn: string,
   occupation: string
 }
+
+export type newPatient = Omit<Patient, 'id'>
+
+export type NonSensitiveDataPatient = Omit<Patient, 'ssn'>

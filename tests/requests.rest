@@ -9,3 +9,16 @@ GET http://localhost:3000/api/diagnoses
 ### Exercise 9.11 - GET Request to patients endpoint
 ## Expect a json with all patients, excluding the ssn property
 GET http://localhost:3000/api/patients
+
+### Exercise 9.12 - POST Request to patients endpoint
+## Expect a json with the new patient with id, excluding the ssn property
+POST http://localhost:3000/api/patients
+Content-Type: application/json
+
+{
+  "name": "Juma Marruá",
+  "dateOfBirth": "1995-07-26",
+  "ssn": "153153-315A",
+  "gender": "female",
+  "occupation": "Caipira"
+}
