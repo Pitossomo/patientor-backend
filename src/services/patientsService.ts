@@ -1,5 +1,5 @@
 import patientsData from '../data/patients.json'
-import { newPatient, NonSensitiveDataPatient, Patient } from '../types'
+import { NewPatient, NonSensitiveDataPatient, Patient } from '../types'
 import { v1 as uuid } from 'uuid'
 
 const removeSensitiveData = ({ id, name, dateOfBirth, gender, occupation }: Patient): NonSensitiveDataPatient => {
@@ -18,7 +18,7 @@ const getPatients = (): Array<NonSensitiveDataPatient> => {
   })
 }
 
-const addPatient = (patient: newPatient): NonSensitiveDataPatient => {
+const addPatient = (patient: NewPatient): NonSensitiveDataPatient => {
   const newPatient = {
     id: uuid(),
     name: patient.name,
