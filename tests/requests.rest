@@ -22,3 +22,7 @@ Content-Type: application/json
   "gender": "female",
   "occupation": "Caipira"
 }
+
+### Exercise 9.16 - GET Request to a single patient endpoint (by id)
+## Expect a json with the all the information for one patient, including the array of patient entries
+GET http://localhost:3000/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667

@@ -11,6 +11,13 @@ router.get('/', (_req, res) => {
   res.json(patients)
 })
 
+router.get('/:id', (req, res) => {
+  const patient = patientsService.getPatients().filter(p => p.id === req.params.id)
+
+  console.log('Fetching the required patient')
+  res.json(patient)
+})
+
 router.post('/', (req, res) => {
 
   try {
@@ -26,6 +33,5 @@ router.post('/', (req, res) => {
     res.status(400).send(errorMessage)
   }
 })
-
 
 export default router

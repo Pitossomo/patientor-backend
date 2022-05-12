@@ -16,9 +16,16 @@ export interface Patient {
   dateOfBirth: string,    // Why not to use Date type?
   gender: string,
   ssn: string,
-  occupation: string
+  occupation: string,
+  entries: Entry[]
 }
 
 export type NewPatient = Omit<Patient, 'id'>
 
-export type NonSensitiveDataPatient = Omit<Patient, 'ssn'>
+//export type NonSensitiveDataPatient = Omit<Patient, 'ssn'>
+//export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>
+export type PublicPatient = Omit<Patient, 'ssn'>
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Entry {
+}
