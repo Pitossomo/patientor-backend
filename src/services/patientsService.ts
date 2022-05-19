@@ -13,6 +13,14 @@ const removeSensitiveData = ({ id, name, dateOfBirth, gender, occupation, entrie
   }
 }
 
+const getPatient = (id: string): Patient | undefined => {
+  const patient = patientsData.find((patient) => patient.id === id)
+  console.log(patient)
+
+  if (!patient) return undefined
+  return { ...patient, entries: [] };
+}
+
 const getPatients = (): Array<PublicPatient> => {
   return patientsData.map((patient) => {
     return removeSensitiveData({ ...patient, entries: [] })
@@ -35,4 +43,4 @@ const addPatient = (patient: NewPatient): PublicPatient => {
   return removeSensitiveData(newPatient)
 }
 
-export default { getPatients, addPatient }
+export default { getPatients, addPatient, getPatient }

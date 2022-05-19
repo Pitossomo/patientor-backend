@@ -12,9 +12,9 @@ router.get('/', (_req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  const patient = patientsService.getPatients().filter(p => p.id === req.params.id)
-
   console.log('Fetching the required patient')
+  const patient = patientsService.getPatient(req.params.id)
+
   res.json(patient)
 })
 
