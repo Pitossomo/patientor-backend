@@ -15,10 +15,9 @@ const removeSensitiveData = ({ id, name, dateOfBirth, gender, occupation, entrie
 
 const getPatient = (id: string): Patient | undefined => {
   const patient = patientsData.find((patient) => patient.id === id)
-  console.log(patient)
 
   if (!patient) return undefined
-  return { ...patient, entries: [] };
+  return { ...patient, entries: [] }
 }
 
 const getPatients = (): Array<PublicPatient> => {
