@@ -13,7 +13,7 @@ export enum Gender {
 export interface Patient {
   id: string,
   name: string,
-  dateOfBirth: string,    // Why not to use Date type?
+  dateOfBirth: string,
   gender: string,
   ssn: string,
   occupation: string,
@@ -49,7 +49,7 @@ interface HealthCheckEntry extends BaseEntry {
 interface OccupationalHealthCareEntry extends BaseEntry {
   type: "OccupationalHealthcare",
   employerName: string;
-  sickLeave: {
+  sickLeave?: {
     startDate: string,
     endDate: string
   };
