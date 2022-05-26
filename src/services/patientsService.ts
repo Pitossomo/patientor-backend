@@ -17,12 +17,12 @@ const getPatient = (id: string): Patient | undefined => {
   const patient = patientsData.find((patient) => patient.id === id)
 
   if (!patient) return undefined
-  return { ...patient, entries: [] }
+  return patient
 }
 
 const getPatients = (): Array<PublicPatient> => {
-  return patientsData.map((patient) => {
-    return removeSensitiveData({ ...patient, entries: [] })
+  return patientsData.map(patient => {
+    return removeSensitiveData(patient)
   })
 }
 
