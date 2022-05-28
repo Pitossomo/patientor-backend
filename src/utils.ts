@@ -1,4 +1,4 @@
-import { Gender, NewPatient } from "./types"
+import { EntryWithoutId, Gender, HealthCheckRating, NewPatient } from "./types"
 
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String
@@ -12,6 +12,10 @@ const isDate = (date: string): boolean => {
 const isGender = (param: any): param is Gender => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return Object.values(Gender).includes(param)
+}
+
+const isHealthCheckRating = (param: any): param is HealthCheckRating => {
+  return Object.values(HealthCheckRating).includes(param)
 }
 
 const parseName = (name: unknown): string => {
@@ -56,6 +60,74 @@ const parseOccupation = (occupation: unknown): string => {
   return occupation
 }
 
+const parseString = (stringToCheck: unknown, variableLabel: string): string => {
+  if (!stringToCheck || !isString(stringToCheck)) {
+    throw new Error(`Invalid or incorrect ${variableLabel}: ${stringToCheck}`)
+  }
+
+  return stringToCheck
+}
+
+const parseHealthCheckRating = (rating: unknown): HealthCheckRating => {
+  if (!rating || !isHealthCheckRating(rating)) {
+    throw new Error(`Incorrect or missing health check rating: ${rating}`)
+  }
+
+  return rating
+}
+
+const toNewHealthCheck = (params: any): EntryWithoutId => {
+  const newEntry: EntryWithoutId = {
+    type: params.type,
+    description: parseString(params.description, `description`),
+    date: parseDate(params.date),
+    specialist: parseString(params.specialist, `specialist`),
+    healthCheckRating: parseHealthCheckRating(params.healthCheckRating)
+  }
+
+  return newEntry
+}
+
+const toNewOccupationalHealthcare = (params: any): EntryWithoutId => {
+  const newEntry: EntryWithoutId = {
+    type: params.type,
+    description: parseString(params.description, 'description'),
+    date: parseDate(params.date),
+    specialist: parseString(params.specialist, 'specialist'),
+    employerName: parseString(params.employerName, 'employer name')
+  }
+
+  return newEntry
+}
+
+const toNewHospitalEntry = (params: any): EntryWithoutId => {
+  const newEntry: EntryWithoutId = {
+    type: params.type,
+    description: parseString(params.description, 'description'),
+    date: parseDate(params.date),
+    specialist: parseString(params.specialist, 'specialist'),
+    discharge: {
+      date: parseString(params.discharge.date, 'discharge date'),
+      criteria: parseString(params.discharge.criteria, 'discharge criteria'),
+    }
+  }
+
+  return newEntry
+}
+
+export const toNewEntry = (params: any): EntryWithoutId | null => {
+  switch (params.type) {
+    case "HealthCheck":
+      return toNewHealthCheck(params)
+    case "OccupationalHealthcare":
+      return toNewOccupationalHealthcare(params)
+    case "Hospital":
+      return toNewHospitalEntry(params)
+    default:
+      return null;
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const toNewPatient = ({ name, dateOfBirth, gender, ssn, occupation }: any): NewPatient => {
   const newPatient: NewPatient = {
@@ -68,4 +140,4 @@ export const toNewPatient = ({ name, dateOfBirth, gender, ssn, occupation }: any
   }
 
   return newPatient
-} 
+}

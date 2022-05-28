@@ -26,3 +26,75 @@ Content-Type: application/json
 ### Exercise 9.16 - GET Request to a single patient endpoint (by id)
 ## Expect a json with the all the information for one patient, including the array of patient entries
 GET http://localhost:3000/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667
+
+### Exercise 9.23 - POST Request to entries endpoint
+## Expect a json with the new entry with id
+POST http://localhost:3000/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "type": "HealthCheck",
+  "description": "Patient is stable",
+  "date": "2022-05-27",
+  "specialist": "Doc Oc",
+  "healthCheckRating": "LowRisk"
+}
+
+### Exercise 9.23 - POST Request to entries endpoint
+## Expect an error for invalid healthCheckRating
+POST http://localhost:3000/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "type": "HealthCheck",
+  "description": "Patient is stable",
+  "date": "2022-05-27",
+  "specialist": "Mary Poppins",
+  "healthCheckRating": "Supercalifragilisticexpialidocious"
+}
+
+### Exercise 9.23 - POST Request to entries endpoint
+## Expect a json with the new entry with id
+POST http://localhost:3000/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "type": "OccupationalHealthcare",
+  "description": "Patient broke his wristle writing customers' orders ",
+  "preferredDbzCharacter": "Baby Vegeta Golden Oozaru",
+  "date": "2022-05-27",
+  "specialist": "Doctor Hank",
+  "employerName": "Hookers"
+}
+
+### Exercise 9.23 - POST Request to entries endpoint
+## Expect a json with the new entry with id
+POST http://localhost:3000/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "type": "Hospital",
+  "description": "Bleeerg Ueee Woooop - patient vomiting",
+  "preferredDbzCharacter": "Son Goku",
+  "date": "2022-05-27",
+  "specialist": "Doctor Doom",
+  "discharge": {
+    "date": "27-05-2022",
+    "criteria": "Good after throwing up all the bad stuff out"
+  }
+}
+
+### Exercise 9.23 - POST Request to entries endpoint
+## Expect an error for not having all required fields
+POST http://localhost:3000/api/patients/d27736ec-f723-11e9-8f0b-362b9e155667/entries
+Content-Type: application/json
+
+{
+  "type": "Hospital",
+  "description": "Bleeerg Ueee Woooop - patient vomiting",
+  "date": "2022-05-27",
+  "specialist": "Doctor Doom",
+  "discharge": {
+    "criteria": "Good after throwing up all the bad stuff out"
+  }
+}
