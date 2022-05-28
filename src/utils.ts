@@ -14,7 +14,9 @@ const isGender = (param: any): param is Gender => {
   return Object.values(Gender).includes(param)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isHealthCheckRating = (param: any): param is HealthCheckRating => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return Object.values(HealthCheckRating).includes(param)
 }
 
@@ -76,8 +78,10 @@ const parseHealthCheckRating = (rating: unknown): HealthCheckRating => {
   return rating
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toNewHealthCheck = (params: any): EntryWithoutId => {
   const newEntry: EntryWithoutId = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     type: params.type,
     description: parseString(params.description, `description`),
     date: parseDate(params.date),
@@ -88,8 +92,10 @@ const toNewHealthCheck = (params: any): EntryWithoutId => {
   return newEntry
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toNewOccupationalHealthcare = (params: any): EntryWithoutId => {
   const newEntry: EntryWithoutId = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     type: params.type,
     description: parseString(params.description, 'description'),
     date: parseDate(params.date),
@@ -100,8 +106,10 @@ const toNewOccupationalHealthcare = (params: any): EntryWithoutId => {
   return newEntry
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toNewHospitalEntry = (params: any): EntryWithoutId => {
   const newEntry: EntryWithoutId = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     type: params.type,
     description: parseString(params.description, 'description'),
     date: parseDate(params.date),
@@ -115,7 +123,11 @@ const toNewHospitalEntry = (params: any): EntryWithoutId => {
   return newEntry
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const toNewEntry = (params: any): EntryWithoutId | null => {
+
+  if (!params.type || !isString(params.type)) return null
+
   switch (params.type) {
     case "HealthCheck":
       return toNewHealthCheck(params)
@@ -124,7 +136,7 @@ export const toNewEntry = (params: any): EntryWithoutId | null => {
     case "Hospital":
       return toNewHospitalEntry(params)
     default:
-      return null;
+      return null
   }
 }
 
